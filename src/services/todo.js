@@ -5,7 +5,7 @@ import update from 'immutability-helper';
  * @return {Array}
  */
 export function getAll() {
-    const problemCount = 16;
+    const problemCount = 5;
     const problemTypes = ["addition", "subtraction", "multiplication", "division" ];
     const problems = [];
     var problemIndex = 0;

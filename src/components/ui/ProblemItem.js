@@ -30,7 +30,7 @@ export default function ProblemItem(props) {
         <li className={className}>
             <div className="checkbox">
                 <div>
-                    <h5>{getProblemStatement(data)} = </h5>
+                    <h4>{getProblemStatement(data)} = </h4>
                 </div>
                 <div>
                     <AnswerBox {...{data, changeAnswer, changeRemainder}}/>

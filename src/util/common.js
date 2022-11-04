@@ -35,3 +35,17 @@ export function wrapChildrenWith(children, props) {
 export function stringInclues(str, substr) {
     return str.indexOf(substr) !== -1;
 }
+
+export function displayTimeSpent(timeseconds) {
+    var hours = Math.floor(timeseconds/3600);
+    var minutes = Math.floor((timeseconds - hours * 3600)/60);
+    var seconds = Math.floor((timeseconds - (hours * 3600) - (minutes * 60)));
+
+    var displayhours = String(hours).padStart(2,'0');
+    var displayminutes = String(minutes).padStart(2,'0');
+    var displayseconds = String(seconds).padStart(2,'0');
+
+    var timetoshow = displayhours + ':' + displayminutes + ':' + displayseconds
+
+    return timetoshow;
+}

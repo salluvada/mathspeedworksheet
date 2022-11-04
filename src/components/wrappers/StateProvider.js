@@ -10,12 +10,15 @@ class StateProvider extends Component {
             query: '',
             mode: MODE_CREATE,
             list: getAll(),
-            timespent: 0
+            timespent: 0,
+            worksheetCompleted: false,
+            timerInterval: ''
         }
     }
 
     componentDidMount(){
-        setInterval(()=>{this.updateTimer(this.state.timespent + 1)}, 1000);
+        const intervalID = setInterval(()=>{this.updateTimer(this.state.timespent + 1)}, 1000);
+        this.setState({timerInterval: intervalID});
     }
 
     render() {
@@ -43,14 +46,23 @@ class StateProvider extends Component {
         this.setState({list: updatedList});
     }
 
+    evaluateCompleted(problemList){
+        if (problemList.filter(item => {return (item.correct === false)}).length === 0){
+            this.setState({worksheetCompleted: true,});
+            clearInterval(this.state.timerInterval);
+        }
+    }
+
     changeAnswer(item) {
         const updatedList = updateAnswer(this.state.list, item);
         this.setState({list: updatedList});
+        this.evaluateCompleted(updatedList);
     }
 
     changeRemainder(item) {
         const updatedList = updateRemainder(this.state.list, item);
         this.setState({list: updatedList});
+        this.evaluateCompleted(updatedList);
     }
 
     changeMode(mode = MODE_NONE) {
